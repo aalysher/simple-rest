@@ -11,7 +11,7 @@ type Config struct {
 		Host string `envconfig:"HTTP_HOST" default:"0.0.0.0"`
 		Port int    `envconfig:"HTTP_PORT" default:"8080"`
 	}
-	Postgres struct {
+	Storage struct {
 		User     string `envconfig:"POSTGRES_USER"`
 		Password string `envconfig:"POSTGRES_PASSWORD"`
 		Host     string `envconfig:"POSTGRES_HOST"`
@@ -28,4 +28,14 @@ func LoadConfig() (*Config, error) {
 	}
 
 	return &cfg, nil
+}
+
+func (c *Config) Address() string {
+	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s",
+		c.Storage.Host,
+		c.Storage.Port,
+		c.Storage.User,
+		c.Storage.Password,
+		c.Storage.DBName,
+	)
 }

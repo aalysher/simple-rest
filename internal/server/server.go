@@ -24,6 +24,5 @@ func NewServer(cfg *config.Config) (*Server, error) {
 }
 
 func (s *Server) Start() error {
-	// s.logger.Info(fmt.Sprintf("start http server: %s", s.cfg.Address()))
 	return s.e.Start(fmt.Sprintf("%s:%d", s.cfg.Server.Host, s.cfg.Server.Port))
 }
