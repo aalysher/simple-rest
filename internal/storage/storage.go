@@ -1,15 +1,27 @@
 package storage
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 
 	"github.com/aalysher/simple-rest/internal/config"
-	"github.com/jmoiron/sqlx"
+	"github.com/aalysher/simple-rest/internal/models"
+	_ "github.com/lib/pq"
 )
 
-func NewStorage(cfg *config.Config) (*sqlx.DB, error) {
-	db, err := sqlx.Open("pgx", cfg.Address())
+type UserRepository interface {
+	CreateUser(user *models.User) error
+	GetUser(id string) (*models.User, error)
+	EditUser(user *models.User) error
+}
+
+type UserStorage struct {
+	db *sql.DB
+}
+
+func NewStorage(cfg *config.Config) (*sql.DB, error) {
+	db, err := sql.Open("postgres", cfg.Address())
 	if err != nil {
 		return nil, fmt.Errorf("database open: %w", err)
 	}
@@ -21,4 +33,8 @@ func NewStorage(cfg *config.Config) (*sqlx.DB, error) {
 	log.Println("Successfully connected to PostgreSQL")
 
 	return db, nil
+}
+
+func CreateUser(user *models.User) error {
+	return nil
 }

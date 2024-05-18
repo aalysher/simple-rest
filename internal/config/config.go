@@ -31,7 +31,7 @@ func LoadConfig() (*Config, error) {
 }
 
 func (c *Config) Address() string {
-	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s",
+	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		c.Storage.Host,
 		c.Storage.Port,
 		c.Storage.User,

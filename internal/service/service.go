@@ -1,17 +1,17 @@
 package service
 
 import (
+	"database/sql"
 	"fmt"
 
 	"github.com/aalysher/simple-rest/internal/config"
 	"github.com/aalysher/simple-rest/internal/server"
 	"github.com/aalysher/simple-rest/internal/storage"
-	"github.com/jmoiron/sqlx"
 )
 
 type Service struct {
 	cfg    *config.Config
-	db     *sqlx.DB
+	db     *sql.DB
 	server *server.Server
 }
 
